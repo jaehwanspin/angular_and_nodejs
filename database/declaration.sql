@@ -132,6 +132,14 @@ CREATE OR REPLACE SQL SECURITY INVOKER VIEW vw_normalUser
 ;
 
 
+CREATE OR REPLACE SQL SECURITY INVOKER VIEW vw_normalcategory
+	AS SELECT catNo
+	        , catName
+	     FROM tbl_category
+	    WHERE catAvailable = 1
+;
+
+
 CREATE OR REPLACE SQL SECURITY INVOKER VIEW vw_normalboard
 	AS SELECT boNo
 	        , boTitle
@@ -165,8 +173,6 @@ CREATE OR REPLACE SQL SECURITY INVOKER VIEW vw_normalfile
   	     FROM tbl_file
   	    WHERE fileAvailable = 1
 ;
-
-
 
 
 
