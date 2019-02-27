@@ -1,0 +1,50 @@
+USE jaehwanspin;
+
+DROP TABLE if EXISTS tbl_file;
+DROP TABLE IF EXISTS tbl_board;
+DROP TABLE IF EXISTS tbl_user;
+
+CREATE TABLE tbl_user (
+
+    usNo INT NOT NULL AUTO_INCREMENT
+  , usId VARCHAR(100) UNIQUE NOT NULL
+  , usPass CHAR(255) NOT NULL
+  , usEmail VARCHAR(255) UNIQUE NOT NULL
+  , usName VARCHAR(30) NULL
+  , regDate DATETIME DEFAULT NOW() NOT NULL
+  , modDate DATETIME NULL
+  , remDate DATETIME NULL
+  
+  , CONSTRAINT pk_user_usNo PRIMARY KEY(usNo)
+)
+;
+
+CREATE TABLE tbl_board (
+	
+	 boNo INT NOT NULL AUTO_INCREMENT
+  , boTitle VARCHAR(255) NOT NULL
+  , boContent TEXT NOT NULL
+  , readCount INT DEFAULT 0 NOT NULL
+  , recomCount INT DEFAULT 0 NOT NULL
+  , writer INT NOT NULL
+  , regDate DATETIME DEFAULT NOW() NOT NULL
+  , modDate DATETIME NULL
+  , remDdate DATETIME NULL
+  
+  , CONSTRAINT pk_board_boNo PRIMARY KEY(boNo)
+  , CONSTRAINT fk_board_writer FOREIGN KEY(writer)
+  	 	REFERENCES tbl_user(usNo) ON DELETE CASCADE
+)
+;
+
+CREATE TABLE tbl_file (
+
+	 fileNo INT NOT NULL AUTO_INCREMENT
+  , fileName VARCHAR(255) NOT NULL
+  , fileDir VARCHAR(255) NOT NULL
+#  , 
+  , CONSTRAINT pk_file_fileNo PRIMARY KEY(fileNo)
+)
+;
+
+COMMIT;
