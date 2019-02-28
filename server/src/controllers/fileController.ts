@@ -24,6 +24,21 @@ export class FileController {
         }
     }
 
-    
+    public async create(req: Request, res: Response): Promise<any> {
+        const db = Database.getInstance();
+        const file = req.body;
+
+        console.log(JSON.stringify(file));
+        const re = fs.readFileSync(file);
+        
+        console.log(re);
+
+        const query: string = 
+                "";
+
+        
+        
+        res.json({result: "success"});
+    }
 
 }

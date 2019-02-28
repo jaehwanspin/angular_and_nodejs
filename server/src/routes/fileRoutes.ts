@@ -15,7 +15,7 @@ export class FileRoutes {
 
     config(): void {
         this.router.get("/:fileName", this.controller.get);
-        this.router.get("/", this.controller.get)
+        this.router.post("/", this.controller.create);
     }
     
 }

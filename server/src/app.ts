@@ -1,4 +1,5 @@
-import express, { Application } from "express";
+import express, { Application, } from "express";
+import bodyParser from "body-parser";
 import morgan from "morgan";
 import cors from "cors";
 
@@ -24,7 +25,9 @@ class Server {
         this.app.use(morgan("combined"));
         this.app.use(cors());
         this.app.use(express.json());
-        this.app.use(express.urlencoded({extended: false}));
+        this.app.use(express.urlencoded({ extended: false }));
+        this.app.use(bodyParser.json({ limit: "50mb" }))
+        this.app.use(bodyParser.urlencoded({ limit: "50mb", extended: true }));
     }
 
     private routes(): void {
