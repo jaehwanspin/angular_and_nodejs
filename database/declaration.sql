@@ -34,6 +34,11 @@ CREATE TABLE tbl_user (
 )
 ;
 
+INSERT INTO tbl_user(usId, usPass, usEmail)
+				  VALUES(SHA2(RAND(), 256), SHA2(RAND(), 256), SHA2(RAND(), 256))
+;
+SELECT ROW_COUNT();
+SELECT * FROM tbl_user;
 
 CREATE TABLE tbl_category (
 
@@ -47,6 +52,8 @@ CREATE TABLE tbl_category (
 )
 ;
 
+
+INSERT INTO tbl_category(catName) VALUES('일반게시판');
 
 # 게시판
 CREATE TABLE tbl_board (
@@ -70,12 +77,20 @@ CREATE TABLE tbl_board (
   	 	
 )
 ;
-
+SELECT * FROM vw_normalboard;
+INSERT INTO tbl_board(catNo, boTitle, boContent, writer)
+VALUES(1, SHA2(RAND(), 256),SHA2(RAND(), 256),1);
+SELECT * 
+           FROM vw_normalboard
+            WHERE TRUE AND boTitle LIKE '%%'
+            AND catNo = 1
+        LIMIT 0, 10;
 
 # 댓글
 CREATE TABLE tbl_comment (
 
     comNo			INT				NOT NULL AUTO_INCREMENT
+  , boNo				INT				NOT NULL
   , comContent 	TEXT				NOT NULL
   , writer 			INT			 	NOT NULL
   , regDate 		DATETIME 		NOT NULL DEFAULT NOW()
@@ -85,9 +100,14 @@ CREATE TABLE tbl_comment (
   , CONSTRAINT pk_comment_comNo PRIMARY KEY(comNo)
   , CONSTRAINT fk_comment_writer FOREIGN KEY(writer)
 		REFERENCES tbl_user(usNo) ON DELETE CASCADE
+  , CONSTRAINT fk_comment_boNo FOREIGN KEY(boNo)
+		REFERENCES tbl_board(boNo) ON DELETE CASCADE
   
 );
 
+INSERT INTO tbl_comment(comContent, writer, boNo)
+VALUES (SHA2(RAND(),256),26, 108);
+SELECT * FROM vw_normalcomment;
 
 # 파일
 CREATE TABLE tbl_file (
@@ -102,7 +122,11 @@ CREATE TABLE tbl_file (
   
 )
 ;
+SELECT fileNo, CONCAT(fileDir, '/', fileName, IF(fileExt IS NULL, '', CONCAT('.', fileExt))) FROM tbl_file;
+INSERT INTO tbl_file(fileName, fileDir, fileExt)
+VALUES('fdsafdsa', 'assets/etc/20190228', NULL);
 
+SELECT * FROM vw_normalboard;
 
 # 게시판 파일
 CREATE TABLE tbl_boardFile (
@@ -141,27 +165,45 @@ CREATE OR REPLACE SQL SECURITY INVOKER VIEW vw_normalcategory
 
 
 CREATE OR REPLACE SQL SECURITY INVOKER VIEW vw_normalboard
-	AS SELECT boNo
-	        , boTitle
-	        , boContent
-	        , readCount
-	        , recomCount
-	        , writer
-	        , regDate
-	        , modDate
-	     FROM tbl_board
-	    WHERE remDate IS NULL
+	AS SELECT b.boNo
+           , c.catNo
+           , c.catName
+			  , b.boTitle
+			  , b.boContent
+   		  , b.readCount
+   		  , b.recomCount
+   		  , u.usNo
+		     , u.usId
+		     , u.usEmail
+		     , u.usName
+			  , b.regDate
+		     , b.modDate
+        FROM (SELECT *
+		          FROM tbl_board
+				   WHERE remDate IS NULL) b
+        JOIN tbl_user u 
+          ON b.writer = u.usNo
+        JOIN vw_normalcategory c
+          ON b.catNo = c.catNo
+       ORDER BY b.boNo DESC
 ;
 
-
 CREATE OR REPLACE SQL SECURITY INVOKER VIEW vw_normalcomment
-	AS SELECT comNo
-	        , comContent
-	        , writer
-	        , regDate
-	        , modDate
-		  FROM tbl_comment
-		 WHERE remDate IS NULL
+	AS SELECT c.comNo
+			  , c.boNo
+	        , c.comContent
+	        , u.usNo
+		     , u.usId
+		     , u.usEmail
+		     , u.usName
+	        , c.regDate
+	        , c.modDate
+		  FROM (SELECT *
+		          FROM tbl_comment
+					WHERE remDate IS NULL) c
+		  JOIN tbl_user u
+		    ON c.writer = u.usNo
+		 ORDER BY c.comNo ASC
 ;
 
 

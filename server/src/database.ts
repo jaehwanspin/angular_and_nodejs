@@ -12,7 +12,9 @@ export class Database {
     }
 
     private constructor() {
-        this.pool = mysql.createPool(JSON.parse(fs.readFileSync("./dbconfig.json").toString()));
+        const config = JSON.parse(fs.readFileSync("./dbconfig.json").toString());
+        
+        this.pool = mysql.createPool(config);
 
         this.pool.getConnection()
             .then(connection => {

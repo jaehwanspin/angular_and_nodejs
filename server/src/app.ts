@@ -3,6 +3,11 @@ import morgan from "morgan";
 import cors from "cors";
 
 import { IndexRoutes } from "./routes/indexRoutes";
+import { UserRoutes } from "./routes/userRoutes";
+import { BoardRoutes } from "./routes/boardRoutes";
+import { CategoryRoutes } from "./routes/categoryRoutes";
+import { CommentRoutes } from "./routes/commentRoutes";
+import { FileRoutes } from "./routes/fileRoutes";
 
 class Server {
 
@@ -24,6 +29,11 @@ class Server {
 
     private routes(): void {
         this.app.use('/', new IndexRoutes().router);
+        this.app.use('/api/user', new UserRoutes().router);
+        this.app.use("/api/board", new BoardRoutes().router);
+        this.app.use("/api/category", new CategoryRoutes().router);
+        this.app.use("/api/comment", new CommentRoutes().router);
+        this.app.use("/api/file", new FileRoutes().router);
     }
 
     public start(): void {

@@ -14,7 +14,7 @@ export class IndexRoutes {
     }
 
     config(): void {
-        this.router.delete('/', this.controller.index);
+        this.router.get('/', this.controller.index);
     }
     
 }

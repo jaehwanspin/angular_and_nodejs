@@ -1,4 +1,5 @@
 import { Request, Response } from 'express';
+
 import { Database } from "../database";
 
 export class UserController {
@@ -26,7 +27,7 @@ export class UserController {
 
         const query: string = 
                 "INSERT INTO tbl_user(usId, usPass, usEmail) "
-            + "                values(   ?,      ?,       ?) ";
+            + "                VALUES(   ?,      ?,       ?) ";
 
         await db.pool.query(query,
             [ user.usId, user.usPass, user.usEmail ]);
@@ -75,12 +76,17 @@ export class UserController {
 
         const query: string =
                 "SELECT * "
-            + "    FROM vw_normaluser "
-            + "   WHERE usNo = ? ";
+            + "    FROM tbl_user "
+            + "   WHERE usId = ? "
+            + "     AND usPass = ? "
+            + "     AND remDate IS NULL";
 
-        result = await db.pool.query(query, [ user.usNo ]);
+        result = await db.pool.query(query, [ user.usId, user.usPass ]);
 
-        result = result[0];
+        if (result[0])
+            result = { login: true };
+        else
+            result = { login: false };
 
         res.json(result);
     }

@@ -15,9 +15,11 @@ export class UserRoutes {
 
     config(): void {
         this.router.get('/:usNo', this.controller.get);
+        this.router.post('/', this.controller.create);
+        this.router.put('/', this.controller.update);
+        this.router.delete('/:usNo', this.controller.delete);
         
-        
-        this.router.post('/', this.controller.getLogin);
+        this.router.post('/login', this.controller.getLogin);
     }
     
 }
