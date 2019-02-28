@@ -1,15 +1,18 @@
 import { Request, Response } from 'express';
-import fs from "fs";
-import { Database } from "../database";
+
+import { Database } from '../database';
 
 export class IndexController {
 
-    public async getOne(req: Request, res: Response): Promise<any> {
-        const db: Database = Database.getInstance();
+    public async index(req: Request, res: Response): Promise<any> {
         var result: any = null;
-        const query: string = `SELECT 'Hi Hello' AS \"Message\"`;
+        const db = Database.getInstance();
+    
+        const query: string =
+                "SELECT '안녕하세요' AS \"Message\" ";
 
-        result = await db.pool.query(query, [ 1 ]);
+        result = await db.pool.query(query);
+
         result = result[0];
 
         res.json(result);
