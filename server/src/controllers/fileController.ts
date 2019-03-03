@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
 import fs from "fs";
 import { Database } from '../database';
+import multer from "multer";
 
 export class FileController {
 
@@ -26,18 +27,9 @@ export class FileController {
 
     public async create(req: Request, res: Response): Promise<any> {
         const db = Database.getInstance();
-        const file = req.body;
-
-        console.log(JSON.stringify(file));
-        const re = fs.readFileSync(file);
         
-        console.log(re);
+        console.log(req.file.filename);
 
-        const query: string = 
-                "";
-
-        
-        
         res.json({result: "success"});
     }
 

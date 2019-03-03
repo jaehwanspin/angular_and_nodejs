@@ -53,7 +53,6 @@ CREATE TABLE tbl_category (
 ;
 
 
-INSERT INTO tbl_category(catName) VALUES('일반게시판');
 
 # 게시판
 CREATE TABLE tbl_board (
@@ -77,7 +76,7 @@ CREATE TABLE tbl_board (
   	 	
 )
 ;
-SELECT * FROM vw_normalboard;
+/*SELECT * FROM vw_normalboard;
 INSERT INTO tbl_board(catNo, boTitle, boContent, writer)
 VALUES(1, SHA2(RAND(), 256),SHA2(RAND(), 256),1);
 SELECT * 
@@ -85,7 +84,7 @@ SELECT *
             WHERE TRUE AND boTitle LIKE '%%'
             AND catNo = 1
         LIMIT 0, 10;
-
+*/
 # 댓글
 CREATE TABLE tbl_comment (
 
@@ -104,11 +103,11 @@ CREATE TABLE tbl_comment (
 		REFERENCES tbl_board(boNo) ON DELETE CASCADE
   
 );
-
+/*
 INSERT INTO tbl_comment(comContent, writer, boNo)
 VALUES (SHA2(RAND(),256),26, 108);
 SELECT * FROM vw_normalcomment;
-
+*/
 # 파일
 CREATE TABLE tbl_file (
 
@@ -122,12 +121,12 @@ CREATE TABLE tbl_file (
   
 )
 ;
-SELECT fileNo, CONCAT(fileDir, '/', fileName, IF(fileExt IS NULL, '', CONCAT('.', fileExt))) FROM tbl_file;
+/*SELECT fileNo, CONCAT(fileDir, '/', fileName, IF(fileExt IS NULL, '', CONCAT('.', fileExt))) FROM tbl_file;
 INSERT INTO tbl_file(fileName, fileDir, fileExt)
 VALUES('fdsafdsa', 'assets/etc/20190228', NULL);
 
 SELECT * FROM vw_normalboard;
-
+*/
 # 게시판 파일
 CREATE TABLE tbl_boardFile (
 	 
@@ -187,6 +186,7 @@ CREATE OR REPLACE SQL SECURITY INVOKER VIEW vw_normalboard
           ON b.catNo = c.catNo
        ORDER BY b.boNo DESC
 ;
+
 
 CREATE OR REPLACE SQL SECURITY INVOKER VIEW vw_normalcomment
 	AS SELECT c.comNo
