@@ -108,6 +108,10 @@ INSERT INTO tbl_comment(comContent, writer, boNo)
 VALUES (SHA2(RAND(),256),26, 108);
 SELECT * FROM vw_normalcomment;
 */
+DELETE 
+
+SELECT * FROM tbl_file;
+DELETE FROM tbl_file;
 # 파일
 CREATE TABLE tbl_file (
 
@@ -141,6 +145,7 @@ CREATE TABLE tbl_boardFile (
 
 );
 
+SELECT * FROM tbl_file;
 
 
 CREATE OR REPLACE SQL SECURITY INVOKER VIEW vw_normalUser
@@ -215,9 +220,25 @@ CREATE OR REPLACE SQL SECURITY INVOKER VIEW vw_normalfile
   	     FROM tbl_file
   	    WHERE fileAvailable = 1
 ;
+SELECT * FROM vw_normalfile;
+SELECT * FROM vw_normalboardfile;
 
+SELECT * FROM tbl_file;
+CREATE OR REPLACE SQL SECURITY INVOKER VIEW vw_normalboardfile
+	AS SELECT b.boNo
+	        , f.fileNo
+	        , f.fileName
+	        , f.fileDir
+	        , f.fileExt
+	     FROM tbl_boardfile bf
+		  JOIN vw_normalboard b
+		    ON bf.boNo = b.boNo
+		  JOIN vw_normalfile f
+		    ON bf.fileNo = f.fileNo
+;
 
-
-
+SELECT * FROM vw_normalfile;
+SELECT * FROM vw_normalboard ORDER BY boNo DESC;
+INSERT INTO tbl_boardfile(fileno, boNo) VALUES(30, 108);
 
 COMMIT;

@@ -6,7 +6,7 @@ export class CategoryController {
 
     public async get(req: Request, res: Response): Promise<any> {
         var result: any = null;
-        const db = Database.getInstance();
+        const db: Database = Database.getInstance();
         const { catNo } = req.params;
 
         const query: string =
@@ -21,19 +21,19 @@ export class CategoryController {
 
     public async getList(req: Request, res: Response): Promise<any> {
         var result: any = null;
-        const db = Database.getInstance();
+        const db: Database = Database.getInstance();
 
         const query: string =
                 "SELECT * "
             + "    FROM vw_category ";
-        
+
         result = await db.pool.query(query);
 
         res.json(result);
     }
 
     public async create(req: Request, res: Response): Promise<any> {
-        const db = Database.getInstance();
+        const db: Database = Database.getInstance();
         const category = req.body;
 
         const query: string = 
@@ -46,7 +46,7 @@ export class CategoryController {
     }
 
     public async update(req: Request, res: Response): Promise<any> {
-        const db = Database.getInstance();
+        const db: Database = Database.getInstance();
         const category = req.body;
 
         var query: string =
@@ -61,7 +61,7 @@ export class CategoryController {
     }
 
     public async delete(req: Request, res: Response): Promise<any> {
-        const db = Database.getInstance();
+        const db: Database = Database.getInstance();
         const { catNo } = req.params;
         const query: string = 
                 "UPDATE tbl_category "

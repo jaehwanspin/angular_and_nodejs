@@ -6,7 +6,7 @@ export class UserController {
 
     public async get(req: Request, res: Response): Promise<any> {
         var result: any = null;
-        const db = Database.getInstance();
+        const db: Database = Database.getInstance();
         const { usNo } = req.params;
 
         const query: string =
@@ -22,7 +22,7 @@ export class UserController {
     }
 
     public async create(req: Request, res: Response): Promise<any> {
-        const db = Database.getInstance();
+        const db: Database = Database.getInstance();
         const user = req.body;
 
         const query: string = 
@@ -36,7 +36,7 @@ export class UserController {
     }
 
     public async update(req: Request, res: Response): Promise<any> {
-        const db = Database.getInstance();
+        const db: Database = Database.getInstance();
         const user = req.body;
 
         var query: string =
@@ -59,7 +59,7 @@ export class UserController {
     }
 
     public async delete(req: Request, res: Response): Promise<any> {
-        const db = Database.getInstance();
+        const db: Database = Database.getInstance();
         const { usNo } = req.params;
         const query: string = 
                 "UPDATE tbl_user "
@@ -71,7 +71,7 @@ export class UserController {
 
     public async getLogin(req: Request, res: Response): Promise<any> {
         var result: any = null;
-        const db = Database.getInstance();
+        const db: Database = Database.getInstance();
         const user = req.body;
 
         const query: string =

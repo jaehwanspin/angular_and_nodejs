@@ -6,7 +6,7 @@ export class CommentController {
 
     public async getList(req: Request, res: Response): Promise<any> {
         var result: any = null;
-        const db = Database.getInstance();
+        const db: Database = Database.getInstance();
         const { boNo } = req.params;
 
         const query: string =
@@ -20,7 +20,7 @@ export class CommentController {
     }
 
     public async create(req: Request, res: Response): Promise<any> {
-        const db = Database.getInstance();
+        const db: Database = Database.getInstance();
         const comment = req.body;
 
         const query = 
@@ -34,7 +34,7 @@ export class CommentController {
     }
 
     public async update(req: Request, res: Response): Promise<any> {
-        const db = Database.getInstance();
+        const db: Database = Database.getInstance();
         const comment = req.body;
 
         const query = 
@@ -50,7 +50,7 @@ export class CommentController {
     }
 
     public async delete(req: Request, res: Response): Promise<any> {
-        const db = Database.getInstance();
+        const db: Database = Database.getInstance();
         const { comNo } = req.params;
 
         const query = 

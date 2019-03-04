@@ -9,6 +9,7 @@ import { BoardRoutes } from "./routes/boardRoutes";
 import { CategoryRoutes } from "./routes/categoryRoutes";
 import { CommentRoutes } from "./routes/commentRoutes";
 import { FileRoutes } from "./routes/fileRoutes";
+import { BoardFileRoutes } from "./routes/boardFileRoutes";
 
 class Server {
 
@@ -37,6 +38,7 @@ class Server {
         this.app.use("/api/category", new CategoryRoutes().router);
         this.app.use("/api/comment", new CommentRoutes().router);
         this.app.use("/api/file", new FileRoutes().router);
+        this.app.use("/api/boardFile", new BoardFileRoutes().router);
     }
 
     public start(): void {

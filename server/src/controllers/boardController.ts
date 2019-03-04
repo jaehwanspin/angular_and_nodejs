@@ -6,7 +6,7 @@ export class BoardController {
 
     public async get(req: Request, res: Response): Promise<any> {
         var result: any = null;
-        const db = Database.getInstance();
+        const db: Database = Database.getInstance();
         const { catNo, boNo } = req.params;
 
         const queryGet =
@@ -34,7 +34,7 @@ export class BoardController {
 
     public async getList(req: Request, res: Response): Promise<any> {
         var result: any = null;
-        const db = Database.getInstance();
+        const db: Database = Database.getInstance();
         const { catNo } = req.params;
         const { searchOpt, keyword, curPage, perPage } = req.query;
 
@@ -67,7 +67,7 @@ export class BoardController {
     }
 
     public async create(req: Request, res: Response): Promise<any> {
-        const db = Database.getInstance();
+        const db: Database = Database.getInstance();
         const board = req.body;
 
         const query = 
@@ -81,7 +81,7 @@ export class BoardController {
     }
 
     public async update(req: Request, res: Response): Promise<any> {
-        const db = Database.getInstance();
+        const db: Database = Database.getInstance();
         const board = req.body;
 
         const query = 
@@ -98,7 +98,7 @@ export class BoardController {
     }
 
     public async delete(req: Request, res: Response): Promise<any> {
-        const db = Database.getInstance();
+        const db: Database = Database.getInstance();
         const { boNo } = req.params;
 
         const query = 
