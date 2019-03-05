@@ -19,7 +19,6 @@ export class BoardFileRoutes {
         this.router.get("/:boNo", this.controller.getList);
         this.router.post("/:boNo", this.fileManager.uploads.single("file"),
             this.controller.create);
-        this.router.delete('/:fileNo', this.controller.delete);
     }
 
 }

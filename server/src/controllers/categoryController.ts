@@ -11,7 +11,7 @@ export class CategoryController {
 
         const query: string =
                 "SELECT * "
-            + "    FROM vw_category "
+            + "    FROM vw_normalcategory "
             + "   WHERE catNo = ? ";
 
         result = await db.pool.query(query, [ catNo ]);
@@ -20,12 +20,15 @@ export class CategoryController {
     }
 
     public async getList(req: Request, res: Response): Promise<any> {
+        // res.header("Access-Control-Allow-Origin", "*");
+        // res.header("Access-Control-Allow-Headers",
+        //     "Origin, X-Requested-With, Content-Type, Accept");
         var result: any = null;
         const db: Database = Database.getInstance();
 
         const query: string =
                 "SELECT * "
-            + "    FROM vw_category ";
+            + "    FROM vw_normalcategory ";
 
         result = await db.pool.query(query);
 

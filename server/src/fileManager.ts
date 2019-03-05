@@ -25,23 +25,27 @@ export class FileManager {
     }
 
     private destConfig(req: Express.Request, file: Express.Multer.File, callback: Function): void {
+
         var today: string = dateFormat(new Date(), "yyyymmdd");
         var subDir = "etc";
         
         const fileExtIdx: number = file.originalname.lastIndexOf(".") + 1;
         const fileExt: string = file.originalname
-            .substring(fileExtIdx, file.originalname.length).toLowerCase();
-
+        .substring(fileExtIdx, file.originalname.length).toLowerCase();
+        
         if (fileExt === "jpg" || fileExt === "png" || fileExt === "gif" ||
-            fileExt === "jpeg" || fileExt === "tif" || fileExt === "bmp") {    
+        fileExt === "jpeg" || fileExt === "tif" || fileExt === "bmp") {    
             subDir = "images";
         }
+        
+        if (!fs.existsSync("assets/images"))
+            fs.mkdirSync("assets/images");
+        if (!fs.existsSync("assets/etc"))
+            fs.mkdirSync("assets/etc");
 
-
-        if (!fs.existsSync("assets/" + subDir + "/" + today)) {
+        if (!fs.existsSync("assets/" + subDir + "/" + today))
             fs.mkdirSync("assets/" + subDir + "/" + today);
-        }
-
+        
         callback(null, "assets/" + subDir + "/" + today + "/");
     }
 
@@ -60,4 +64,5 @@ export class FileManager {
         
         callback(null, sha.getHash("HEX") + fileExt);
     }
+    
 }

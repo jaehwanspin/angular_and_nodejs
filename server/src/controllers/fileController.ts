@@ -59,8 +59,9 @@ export class FileController {
         const db: Database = Database.getInstance();
         const { fileNo } = req.params;
         const query: string =
-                "DELETE FROM tbl_file "
-            + "        WHERE fileNo = ? ";
+                "UPDATE tbl_file "
+            + "     SET fileAvailable = 0 "
+            + "   WHERE fileNo = ? ";
 
         await db.pool.query(query, [ fileNo ]);
 

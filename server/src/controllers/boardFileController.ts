@@ -54,21 +54,15 @@ export class BoardFileController {
                 fileDir: req.file.destination,
                 fileExt: fileExt
             }
-            console.log("retret " + ret);
             const fileNo = (await db.pool.query(selectQuery, [
                 ret.fileName, ret.fileDir, ret.fileExt
-            ]))[0];
-            console.log("fileNofileNo " + fileNo);
+            ]))[0].fileNo;
 
             await db.pool.query(boardFileQuery, [ boNo, fileNo ]);
+
+            res.json({ result: "success" });
+        } else {
+            res.json({ result: "failed" });
         }
-
-        res.json(ret);
-    }
-
-    public async delete(req: Request, res: Response): Promise<any> {
-        const db: Database = Database.getInstance();
-        const { fileNo } = req.params;
-
     }
 }
