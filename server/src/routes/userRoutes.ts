@@ -20,6 +20,7 @@ export class UserRoutes {
         this.router.delete('/:usNo', this.controller.delete);
         
         this.router.post('/login', this.controller.getLogin);
+        this.router.post("/usIdValidated", this.controller.getUsIdValidated);
     }
     
 }

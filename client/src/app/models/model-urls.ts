@@ -1,19 +1,30 @@
 export class Urls {
+
+  private host: string;
+  private port: string;
+
   public get: string;
   public getList: string;
   public create: string;
   public update: string;
   public delete: string;
+  public others: any;
 
-  constructor(model?: any) {
+  constructor(model?: {
+                        get?: string,
+                        getList?: string,
+                        create?: string,
+                        update?: string,
+                        delete?: string,
+                        others?: Object
+                      }
+                        ) {
     var url: string = null;
 
-    console.log(JSON.stringify(model));
-
     if (model) {
-      const host: string = "localhost";
-      const port: string = "8888";
-      url = "http://" + host + ":" + port + "/"
+      this.host = "localhost";
+      this.port = "8888";
+      url = "http://" + this.host + ":" + this.port + "/";
 
       this.get = url + model.get;
       this.getList = url + model.getList;
@@ -21,7 +32,11 @@ export class Urls {
       this.update = url + model.update;
       this.delete = url + model.delete;
 
-      console.log(JSON.stringify(this));
+      this.others = model.others;
     }
+  }
+
+  public getHost(): string {
+    return "http://" + this.host + ":" + this.port + "/";
   }
 }

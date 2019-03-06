@@ -59,7 +59,7 @@ export class BoardController {
             params.push(searchKeyword);
         }
         params.push(catNo);
-        params.push(parseInt(curPage) - 1);
+        params.push(parseInt(curPage));
         params.push(parseInt(perPage));
         result = await db.pool.query(query, params);
         

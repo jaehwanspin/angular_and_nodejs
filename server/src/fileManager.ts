@@ -55,7 +55,7 @@ export class FileManager {
         var sha = new jsSHA("SHA-256", "TEXT");
     
         sha.update(file.originalname + today + file.size + time);
-
+        
         const fileExtIdx: number = file.originalname.lastIndexOf(".") + 1;
         var fileExt: string = "." + file.originalname
             .substring(fileExtIdx, file.originalname.length).toLowerCase();

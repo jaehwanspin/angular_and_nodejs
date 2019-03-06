@@ -2,15 +2,20 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, COMPOSITION_BUFFER_MODE } from "@angular/forms";
 import { HttpClientModule } from "@angular/common/http";
+import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
+import { ClickOutsideModule } from "ng-click-outside";
+
+import { AppRoutingModule } from './app-routing.module';
 
 import { AppComponent } from './app.component';
 import { BoardComponent } from './components/board/board.component';
 import { UserComponent } from './components/user/user.component';
 import { LoginComponent } from './components/login/login.component';
 import { JoinComponent } from './components/join/join.component';
-import { AppRoutingModule } from './app-routing.module';
 import { FooterComponent } from './components/footer/footer.component';
 import { HomeComponent } from './components/home/home.component';
+import { BoardDetailComponent } from './components/board-detail/board-detail.component';
+import { AlertModalComponent } from './components/alert-modal/alert-modal.component';
 
 @NgModule({
   declarations: [
@@ -20,15 +25,20 @@ import { HomeComponent } from './components/home/home.component';
     LoginComponent,
     JoinComponent,
     FooterComponent,
-    HomeComponent
+    HomeComponent,
+    BoardDetailComponent,
+    AlertModalComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpClientModule,
+    NgbModule,
+    ClickOutsideModule,
     AppRoutingModule
   ],
-  providers: [{ provide: COMPOSITION_BUFFER_MODE, useValue: false }],
-  bootstrap: [AppComponent]
+  providers: [ { provide: COMPOSITION_BUFFER_MODE, useValue: false } ],
+  bootstrap: [ AppComponent ],
+  entryComponents: [ AlertModalComponent ]
 })
 export class AppModule { }

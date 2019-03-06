@@ -1,19 +1,23 @@
-export class Pagination {
+export class Pagination <T> {
 
   private perPage: number;
   private numOfRows: number;
   private keyword: string;
   private searchOpt: string;
+  private searchOptList: string[];
   private curPage: number;
 
-  public dataList: any[];
+  public dataList: T[];
 
-  constructor(curPage: number = 1, rowOpt: number = 6,
-    keyword: string = "", srchOpt: string = "") {
+  constructor(curPage: number = 1, perPage: number = 10,
+    keyword: string = "", searchOptList?: string[]) {
+
+    this.dataList = new Array<T>();
     this.curPage = curPage;
-    this.perPage = rowOpt;
+    this.perPage = perPage;
     this.keyword = keyword;
-    this.searchOpt = srchOpt;
+    this.searchOptList = searchOptList;
+    this.searchOpt = searchOptList[0];
   }
 
   public setRowOpt(rowOpt: number): void {
@@ -29,9 +33,8 @@ export class Pagination {
     else if (this.curPage < 1)
       this.curPage = 1;
   }
-  public setSrchOpt(srchOpt: string): void {
-    console.log(srchOpt);
-    this.searchOpt = srchOpt;
+  public setSearchOpt(searchOpt: string): void {
+    this.searchOpt = searchOpt;
   }
   public setNumOfRows(numOfRows: number): void {
     this.numOfRows = numOfRows;
@@ -66,6 +69,6 @@ export class Pagination {
       curPage: (this.curPage - 1) * this.perPage,
       keyword: this.keyword,
       searchOpt: this.searchOpt
-    }
+    };
   }
 }

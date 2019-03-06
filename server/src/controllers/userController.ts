@@ -91,4 +91,21 @@ export class UserController {
         res.json(result);
     }
 
+    public async getUsIdValidated(req: Request, res: Response): Promise<any> {
+        var result: any = null;
+        const db: Database = Database.getInstance();
+        const { usId } = req.body;
+
+        const query: string = 
+                "SELECT usId "
+            + "    FROM tbl_user "
+            + "   WHERE usId = ? ";
+
+        result = await db.pool.query(query, [ usId ]);
+
+        if (result && result[0])
+            res.json({ result: false });
+        else
+            res.json({ result: true });
+    }
 }

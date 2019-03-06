@@ -6,6 +6,7 @@ import { JoinComponent } from "./components/join/join.component";
 import { UserComponent } from "./components/user/user.component";
 import { BoardComponent } from "./components/board/board.component";
 import { HomeComponent } from "./components/home/home.component";
+import { BoardDetailComponent } from "./components/board-detail/board-detail.component";
 
 @NgModule({
   declarations: [],
@@ -16,7 +17,8 @@ import { HomeComponent } from "./components/home/home.component";
       { path: "join", component: JoinComponent },
       { path: "login", component: LoginComponent },
       { path: "user/:usNo", component: UserComponent },
-      { path: "board/:boNo", component: BoardComponent }
+      { path: "board/:catNo", component: BoardComponent },
+      { path: "board/detail/:boNo", component: BoardDetailComponent }
     ])
   ],
   exports: [
