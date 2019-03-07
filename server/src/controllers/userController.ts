@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
 
 import { Database } from "../database";
+import { EmailManager } from '../emailManager';
 
 export class UserController {
 
@@ -107,5 +108,45 @@ export class UserController {
             res.json({ result: false });
         else
             res.json({ result: true });
+    }
+
+    public async getUsEmailValidated(req: Request, res: Response): Promise<any> {
+        var result: any = null;
+        const db: Database = Database.getInstance();
+        const { usEmail } = req.body;
+
+        const query: string = 
+                "SELECT usId "
+            + "    FROM tbl_user "
+            + "   WHERE usEmail = ? ";
+
+        result = await db.pool.query(query, [ usEmail ]);
+
+        if (result && result[0])
+            res.json({ result: false });
+        else
+            res.json({ result: true });
+    }
+
+    public async genEmailCode(req: Request, res: Response): Promise<any> {
+        var genedCode = 0;
+
+        var gen = () => {
+            var code = Math.floor(Math.random() * 1000000);
+            if (code < 1000000 && code >= 100000) genedCode = code;
+            else gen();
+        }
+        gen();
+        
+        const { usEmail } = req.body;
+
+        const em: EmailManager = EmailManager.getInstance();
+        em.sendMail({
+            to: usEmail,
+            subject: "회원가입 이메일 인증코드",
+            text: `인증 코드는 ${genedCode} 입니다`
+        });
+        
+        res.json({ code: genedCode });
     }
 }

@@ -1,3 +1,5 @@
 server/node_modules
 server/build
-server/assets
+server/assets/images
+server/assets/etc
+server/mailauthconfig.json

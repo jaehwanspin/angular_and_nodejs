@@ -1,0 +1,11 @@
+<div class="modal-header">
+  <h4 class="modal-title">이메일 인증</h4>
+    <span aria-hidden="true">&times;{{this.genedCode}}</span>
+</div>
+<div class="modal-body">
+  <input type="text" name="name" class="form-control" id="name"
+    placeholder="입력한 이메일주소로 발송된 인증코드 입력" required autofocus [(ngModel)]="this.code">
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-outline-dark" (click)="this.verify()">확인</button>
+</div>

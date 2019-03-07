@@ -14,7 +14,9 @@ DROP TABLE IF EXISTS tbl_board CASCADE;
 DROP TABLE if EXISTS tbl_category CASCADE;
 DROP TABLE IF EXISTS tbl_user CASCADE;
 
+DELETE FROM tbl_user WHERE usEmail = 'jaehwanspin@gmail.com';
 
+SELECT * FROM vw_normaluser;
 # 사용자
 CREATE TABLE tbl_user (
 
@@ -222,7 +224,7 @@ CREATE OR REPLACE SQL SECURITY INVOKER VIEW vw_normalfile
 ;
 SELECT * FROM vw_normalfile;
 SELECT * FROM vw_normalboardfile;
-
+SELECT * FROM vw_normalcategory;
 SELECT * FROM tbl_file;
 CREATE OR REPLACE SQL SECURITY INVOKER VIEW vw_normalboardfile
 	AS SELECT b.boNo
@@ -236,8 +238,10 @@ CREATE OR REPLACE SQL SECURITY INVOKER VIEW vw_normalboardfile
 		  JOIN vw_normalfile f
 		    ON bf.fileNo = f.fileNo
 ;
-
+DELETE FROM tbl_file;
+DELETE FROM tbl_boardfile;
 SELECT * FROM vw_normalfile;
+SELECT * FROM vw_normalboardfile;
 SELECT * FROM vw_normalboard ORDER BY boNo DESC;
 INSERT INTO tbl_boardfile(fileno, boNo) VALUES(30, 108);
 

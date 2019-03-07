@@ -21,6 +21,8 @@ export class UserRoutes {
         
         this.router.post('/login', this.controller.getLogin);
         this.router.post("/usIdValidated", this.controller.getUsIdValidated);
+        this.router.post("/usEmailValidated", this.controller.getUsEmailValidated);
+        this.router.post("/genEmailCode", this.controller.genEmailCode);
     }
     
 }

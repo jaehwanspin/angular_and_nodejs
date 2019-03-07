@@ -19,7 +19,9 @@ export class JoinService {
     this.userREST = new Urls({
       create: "api/user",
       others: {
-        usIdValidated: "api/user/usIdValidated"
+        usIdValidated: "api/user/usIdValidated",
+        usEmailValidated: "api/user/usEmailValidated",
+        genEmailCode: "api/user/genEmailCode"
       }
     });
   }
@@ -29,7 +31,17 @@ export class JoinService {
         this.userREST.others.usIdValidated, { usId: usId });
   }
 
+  public validateUsEmail(usEmail: string): Observable<any> {
+    return this.http.post(this.userREST.getHost() +
+        this.userREST.others.usEmailValidated, { usEmail: usEmail });
+  }
+
   public createUser(user: UserExt): Observable<any> {
     return this.http.post(this.userREST.create, user);
+  }
+
+  public genEmailCode(usEmail: string): Observable<any> {
+    return this.http.post(this.userREST.getHost() +
+        this.userREST.others.genEmailCode, { usEmail: usEmail });
   }
 }

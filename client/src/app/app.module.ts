@@ -16,6 +16,7 @@ import { FooterComponent } from './components/footer/footer.component';
 import { HomeComponent } from './components/home/home.component';
 import { BoardDetailComponent } from './components/board-detail/board-detail.component';
 import { AlertModalComponent } from './components/alert-modal/alert-modal.component';
+import { EmailVerificationModalComponent } from './components/email-verification-modal/email-verification-modal.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { AlertModalComponent } from './components/alert-modal/alert-modal.compon
     FooterComponent,
     HomeComponent,
     BoardDetailComponent,
-    AlertModalComponent
+    AlertModalComponent,
+    EmailVerificationModalComponent
   ],
   imports: [
     BrowserModule,
@@ -39,6 +41,9 @@ import { AlertModalComponent } from './components/alert-modal/alert-modal.compon
   ],
   providers: [ { provide: COMPOSITION_BUFFER_MODE, useValue: false } ],
   bootstrap: [ AppComponent ],
-  entryComponents: [ AlertModalComponent ]
+  entryComponents: [
+    AlertModalComponent,
+    EmailVerificationModalComponent
+  ]
 })
 export class AppModule { }
