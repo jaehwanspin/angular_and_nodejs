@@ -21,15 +21,26 @@ export class EmailManager {
     }
 
     private getConfig(): any {
+        // https://nubiz.tistory.com/703
+        //
         // ./server/mailauthconfig.json
         // 
         // {
         //     "service": "gmail",
         //     "auth": {
+        //         "type": "OAuth2"
         //         "user": "youraccount@gmail.com",
-        //         "pass": "yourpassword"
+        //         "pass": "yourpassword",
+        //         "clientId": "",
+        //         "clientSecret": "",
+        //         "refreshToken": "",
+        //         "accessToken": "",
+        //         "expires": 3600
         //     }
         // }
+        // https://myaccount.google.com/u/3/lesssecureapps?pageId=none
+        //
+        // accepted
         return JSON.parse(fs.readFileSync("./mailauthconfig.json").toString());
     }
 

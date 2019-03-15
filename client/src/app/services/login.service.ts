@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Urls } from '../models/model-urls';
-import { User } from '../models/model-user';
+import { UserExt } from '../models/model-user-ext';
 
 @Injectable({
   providedIn: 'root'
@@ -19,7 +19,7 @@ export class LoginService {
     });
   }
 
-  public login(user: User): Observable<any> {
+  public login(user: UserExt): Observable<any> {
     return this.http.post(this.userREST.getHost() +
       this.userREST.others.login, user);
   }

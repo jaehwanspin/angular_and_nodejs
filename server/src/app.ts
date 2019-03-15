@@ -2,6 +2,7 @@ import express, { Application, } from "express";
 import bodyParser from "body-parser";
 import morgan from "morgan";
 import cors from "cors";
+import os from "os";
 
 import { IndexRoutes } from "./routes/indexRoutes";
 import { UserRoutes } from "./routes/userRoutes";
@@ -55,6 +56,10 @@ class Server {
         });
     }
 }
+
+console.log(os.type());
+console.log(os.release());
+console.log(os.platform());
 
 const server: Server = new Server();
 server.start();

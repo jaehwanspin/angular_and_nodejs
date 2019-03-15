@@ -14,8 +14,13 @@ DROP TABLE IF EXISTS tbl_board CASCADE;
 DROP TABLE if EXISTS tbl_category CASCADE;
 DROP TABLE IF EXISTS tbl_user CASCADE;
 
+COMMIT;
+INSERT INTO tbl_category(catName) VALUES('다른게시판');
+SELECT * FROM tbl_board WHERE writer = 25;
+DELETE FROM tbl_user WHERE usId = 'jaehwanspin';
 DELETE FROM tbl_user WHERE usEmail = 'jaehwanspin@gmail.com';
-
+SELECT * FROM tbl_user ORDER BY usNo DESC;
+DELETE FROM tbl_user WHERE usNo = 28;
 SELECT * FROM vw_normaluser;
 # 사용자
 CREATE TABLE tbl_user (

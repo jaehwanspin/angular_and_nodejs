@@ -17,13 +17,17 @@ export class AppService {
 
   ) {
     this.categoryREST = new Urls({
-      get: "api/category",
+      get: "api/user",
       getList: "api/category",
       create: "api/category",
       update: "api/category",
       delete: "api/category"
     });
 
+  }
+
+  public getUser(usNo: number): Observable<any> {
+    return this.http.get(this.categoryREST.get + `/${usNo}`);
   }
 
   public getCategoryList(): Observable<any> {

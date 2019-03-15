@@ -68,6 +68,8 @@ export class UserController {
             + "   WHERE usNo = ?"
 
         await db.pool.query(query, [ usNo ]);
+
+        res.json({ result: "success" });
     }
 
     public async getLogin(req: Request, res: Response): Promise<any> {
@@ -76,16 +78,16 @@ export class UserController {
         const user = req.body;
 
         const query: string =
-                "SELECT * "
+                "SELECT usNo "
             + "    FROM tbl_user "
             + "   WHERE usId = ? "
             + "     AND usPass = ? "
-            + "     AND remDate IS NULL";
+            + "     AND remDate IS NULL ";
 
         result = await db.pool.query(query, [ user.usId, user.usPass ]);
 
         if (result[0])
-            result = { login: true };
+            result = { login: true, usNo: result[0].usNo };
         else
             result = { login: false };
 

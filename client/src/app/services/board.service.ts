@@ -20,8 +20,16 @@ export class BoardService {
       getList: "api/board/",
       create: "api/board/",
       update: "api/board/",
-      delete: "api/board/"
+      delete: "api/board/",
+      others: {
+        category: "api/category/"
+      }
     });
+  }
+
+  public getCategory(catNo: number): Observable<any> {
+    return this.http.get(this.boardREST.getHost()
+      + this.boardREST.others.category + catNo);
   }
 
   public getBoardList(query: any, catNo: number): Observable<any> {

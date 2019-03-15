@@ -17,6 +17,7 @@ import { HomeComponent } from './components/home/home.component';
 import { BoardDetailComponent } from './components/board-detail/board-detail.component';
 import { AlertModalComponent } from './components/alert-modal/alert-modal.component';
 import { EmailVerificationModalComponent } from './components/email-verification-modal/email-verification-modal.component';
+import { RouteReuseStrategy } from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,10 @@ import { EmailVerificationModalComponent } from './components/email-verification
     ClickOutsideModule,
     AppRoutingModule
   ],
-  providers: [ { provide: COMPOSITION_BUFFER_MODE, useValue: false } ],
+  providers: [
+    { provide: COMPOSITION_BUFFER_MODE, useValue: false },
+    //{ provide: RouteReuseStrategy }
+  ],
   bootstrap: [ AppComponent ],
   entryComponents: [
     AlertModalComponent,
