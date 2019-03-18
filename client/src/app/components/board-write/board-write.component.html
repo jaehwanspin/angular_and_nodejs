@@ -1,0 +1,10 @@
+<div class="container">
+  <h2 *ngIf="this.category">{{this.category.catName}}</h2>
+  <h3>게시글쓰기</h3>
+  <!-- <app-ngx-editor [editable]="true" [spellcheck]="true" [height]="auto" [minHeight]="10"
+    [height]="1000" [(ngModel)]="this.board.boContent"> -->
+    <app-ngx-editor [editable]="true" [spellcheck]="true" [height]="auto" [minHeight]="10" [width]="auto"
+    [height]="1000" [(ngModel)]="content">
+  </app-ngx-editor>
+  {{content}}
+</div>
