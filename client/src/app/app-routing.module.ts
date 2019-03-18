@@ -8,6 +8,7 @@ import { UserComponent } from "./components/user/user.component";
 import { BoardComponent } from "./components/board/board.component";
 import { HomeComponent } from "./components/home/home.component";
 import { BoardDetailComponent } from "./components/board-detail/board-detail.component";
+import { BoardWriteComponent } from './components/board-write/board-write.component';
 
 @NgModule({
   declarations: [],
@@ -19,7 +20,8 @@ import { BoardDetailComponent } from "./components/board-detail/board-detail.com
       { path: "login", component: LoginComponent },
       { path: "user/:usNo", component: UserComponent },
       { path: "board/:catNo", component: BoardComponent },
-      { path: "board/detail/:boNo", component: BoardDetailComponent }
+      { path: "board/detail/:boNo", component: BoardDetailComponent },
+      { path: "board/:catNo/write", component: BoardWriteComponent }
     ])
   ],
   exports: [

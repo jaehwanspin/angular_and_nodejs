@@ -14,14 +14,7 @@ DROP TABLE IF EXISTS tbl_board CASCADE;
 DROP TABLE if EXISTS tbl_category CASCADE;
 DROP TABLE IF EXISTS tbl_user CASCADE;
 
-COMMIT;
-INSERT INTO tbl_category(catName) VALUES('다른게시판');
-SELECT * FROM tbl_board WHERE writer = 25;
-DELETE FROM tbl_user WHERE usId = 'jaehwanspin';
-DELETE FROM tbl_user WHERE usEmail = 'jaehwanspin@gmail.com';
-SELECT * FROM tbl_user ORDER BY usNo DESC;
-DELETE FROM tbl_user WHERE usNo = 28;
-SELECT * FROM vw_normaluser;
+
 # 사용자
 CREATE TABLE tbl_user (
 
@@ -41,11 +34,6 @@ CREATE TABLE tbl_user (
 )
 ;
 
-INSERT INTO tbl_user(usId, usPass, usEmail)
-				  VALUES(SHA2(RAND(), 256), SHA2(RAND(), 256), SHA2(RAND(), 256))
-;
-SELECT ROW_COUNT();
-SELECT * FROM tbl_user;
 
 CREATE TABLE tbl_category (
 
@@ -58,7 +46,6 @@ CREATE TABLE tbl_category (
 
 )
 ;
-
 
 
 # 게시판
@@ -83,15 +70,8 @@ CREATE TABLE tbl_board (
   	 	
 )
 ;
-/*SELECT * FROM vw_normalboard;
-INSERT INTO tbl_board(catNo, boTitle, boContent, writer)
-VALUES(1, SHA2(RAND(), 256),SHA2(RAND(), 256),1);
-SELECT * 
-           FROM vw_normalboard
-            WHERE TRUE AND boTitle LIKE '%%'
-            AND catNo = 1
-        LIMIT 0, 10;
-*/
+
+
 # 댓글
 CREATE TABLE tbl_comment (
 
@@ -110,15 +90,8 @@ CREATE TABLE tbl_comment (
 		REFERENCES tbl_board(boNo) ON DELETE CASCADE
   
 );
-/*
-INSERT INTO tbl_comment(comContent, writer, boNo)
-VALUES (SHA2(RAND(),256),26, 108);
-SELECT * FROM vw_normalcomment;
-*/
-DELETE 
 
-SELECT * FROM tbl_file;
-DELETE FROM tbl_file;
+
 # 파일
 CREATE TABLE tbl_file (
 
@@ -132,12 +105,8 @@ CREATE TABLE tbl_file (
   
 )
 ;
-/*SELECT fileNo, CONCAT(fileDir, '/', fileName, IF(fileExt IS NULL, '', CONCAT('.', fileExt))) FROM tbl_file;
-INSERT INTO tbl_file(fileName, fileDir, fileExt)
-VALUES('fdsafdsa', 'assets/etc/20190228', NULL);
 
-SELECT * FROM vw_normalboard;
-*/
+
 # 게시판 파일
 CREATE TABLE tbl_boardFile (
 	 
@@ -152,10 +121,8 @@ CREATE TABLE tbl_boardFile (
 
 );
 
-SELECT * FROM tbl_file;
 
-
-CREATE OR REPLACE SQL SECURITY INVOKER VIEW vw_normalUser
+CREATE OR REPLACE SQL SECURITY INVOKER VIEW vw_normaluser
 	AS SELECT usNo
 	        , usId
 	        , usEmail
@@ -227,27 +194,20 @@ CREATE OR REPLACE SQL SECURITY INVOKER VIEW vw_normalfile
   	     FROM tbl_file
   	    WHERE fileAvailable = 1
 ;
-SELECT * FROM vw_normalfile;
-SELECT * FROM vw_normalboardfile;
-SELECT * FROM vw_normalcategory;
-SELECT * FROM tbl_file;
+
+
 CREATE OR REPLACE SQL SECURITY INVOKER VIEW vw_normalboardfile
 	AS SELECT b.boNo
 	        , f.fileNo
 	        , f.fileName
 	        , f.fileDir
 	        , f.fileExt
-	     FROM tbl_boardfile bf
+	     FROM tbl_boardFile bf
 		  JOIN vw_normalboard b
 		    ON bf.boNo = b.boNo
 		  JOIN vw_normalfile f
 		    ON bf.fileNo = f.fileNo
 ;
-DELETE FROM tbl_file;
-DELETE FROM tbl_boardfile;
-SELECT * FROM vw_normalfile;
-SELECT * FROM vw_normalboardfile;
-SELECT * FROM vw_normalboard ORDER BY boNo DESC;
-INSERT INTO tbl_boardfile(fileno, boNo) VALUES(30, 108);
 
 COMMIT;
+

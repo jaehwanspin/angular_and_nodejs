@@ -43,8 +43,10 @@ export class AppComponent implements OnInit, OnChanges {
     if (usNo != 0) {
       this.appService.getUser(usNo)
         .subscribe(user => {
-          this.user = new User(user);
-          console.log("user " + JSON.stringify(this.user));
+          if (user)
+            this.user = new User(user);
+          else
+            this.user = null;
         });
     }
   }

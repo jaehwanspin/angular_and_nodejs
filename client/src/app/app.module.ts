@@ -18,6 +18,8 @@ import { BoardDetailComponent } from './components/board-detail/board-detail.com
 import { AlertModalComponent } from './components/alert-modal/alert-modal.component';
 import { EmailVerificationModalComponent } from './components/email-verification-modal/email-verification-modal.component';
 import { RouteReuseStrategy } from '@angular/router';
+import { BoardWriteComponent } from './components/board-write/board-write.component';
+import { BoardModifyComponent } from './components/board-modify/board-modify.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +32,9 @@ import { RouteReuseStrategy } from '@angular/router';
     HomeComponent,
     BoardDetailComponent,
     AlertModalComponent,
-    EmailVerificationModalComponent
+    EmailVerificationModalComponent,
+    BoardWriteComponent,
+    BoardModifyComponent
   ],
   imports: [
     BrowserModule,

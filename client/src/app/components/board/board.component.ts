@@ -1,10 +1,14 @@
 import { Component, OnInit, OnChanges } from '@angular/core';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 import { Pagination } from "../../utils/pagination";
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Board } from 'src/app/models/model-board';
 import { BoardService } from 'src/app/services/board.service';
 import { Category } from 'src/app/models/model-category';
+
+import { AlertModalComponent } from "../alert-modal/alert-modal.component";
+import { modelGroupProvider } from '@angular/forms/src/directives/ng_model_group';
 
 @Component({
   selector: 'app-board',
@@ -17,8 +21,10 @@ export class BoardComponent implements OnInit, OnChanges {
   private category: Category;
 
   constructor(
+    private router: Router,
     private route: ActivatedRoute,
-    private boardService: BoardService
+    private boardService: BoardService,
+    private modalService: NgbModal
   ) {
     this.pagination = new Pagination(1, 10, "", [ "t", "c", "u" ]);
     this.category = new Category();
@@ -35,6 +41,19 @@ export class BoardComponent implements OnInit, OnChanges {
     this.getBoardList();
     this.getCatName();
     console.log(this.route.url);
+  }
+
+  public writeBoard(): void {
+    if (localStorage.getItem("signedUser")) {
+      this.router.navigateByUrl(`/board/${this.category.catNo}/write`);
+    } else {
+      const modal = this.modalService.open(AlertModalComponent, {
+        backdrop: "static", keyboard: false
+      });
+      modal.componentInstance.title = "게시판"
+      modal.componentInstance.content = "로그인 후 이용해주세요"
+      modal.componentInstance.nextPath = "/login";
+    }
   }
 
   public getCatName(): void {
